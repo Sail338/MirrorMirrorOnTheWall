@@ -5,7 +5,8 @@ So far the main features are,
 
 1.Mirrors Notifcations
 
-2.Can send files from PC to phone and Phone to PC
+2.Can send files from PC to phone and Phone to PC.
+
 3. Text From Your computer
 
 
