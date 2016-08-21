@@ -7,7 +7,6 @@ So far the main features are,
 
 2.Can send files from PC to phone and Phone to PC.
 
-3. Text From Your computer
 
 
 
