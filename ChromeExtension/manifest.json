@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Client the plient",
+  "description": "This extension will analyze a page using GTmetrix",
+  "version": "1.0",
+
+"browser_action": {
+	     "default_icon": "icon.png",
+	         "default_popup": "popup.html"
+		   },
+
+
+	   "background": {
+			   "scripts":["aws-sdk.min.js","popup.js"]
+		   },
+		  "permissions": [
+   "gcm","storage","notifications","https://sdk.amazonaws.com/js/"
+		  ],
+
+ "content_security_policy": "script-src 'self' https://sdk.amazonaws.com/js/; object-src 'self'"
+}
