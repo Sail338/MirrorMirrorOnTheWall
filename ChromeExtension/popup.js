@@ -1,4 +1,4 @@
-
+var thecode = false;
 function registerCallback(registrationId) {
 	  if (chrome.runtime.lastError) {
 		  console.log("phsit");
@@ -12,6 +12,8 @@ function registerCallback(registrationId) {
 	 sendToServer(registrationId);
 	//set registration to true
 }
+
+
 chrome.runtime.onStartup.addListener(function() {
 
 
@@ -19,20 +21,28 @@ chrome.runtime.onStartup.addListener(function() {
 		if(result.code === "" || result.code === null || result.code===undefined){
 		     var codea = makeid();
 		     console.log("codea is " + codea);
-		     document.write("<b> Enter The Code In The Android App </b>")
-		     document.write("<h1>" + codea + "</h1>");
+			thecode = result.code
+			var views = chrome.extension.getViews({type: "popup"});
+			    for (var i = 0; i < views.length; i++) {
+				                    views[i].document.getElementById('x').innerHTML="MY custom value";
+				            }
+
+		     document.write(" Enter The Code In The Android App")
+		     document.write( codea);
 		     chrome.storage.local.set({'code':codea});
 		    
 	     }
 			else{
 				var code = result.code;
+			var views = chrome.extension.getViews({type: "popup"});
 
-		     console.log("result.code" + result.code);
-				  document.write("<b> Enter The Code In The Android App </b>")
-		                document.write("<h1>" + code + "</h1>");
+		     console.log("BAAHHAAH" + result.code);
+				  document.write(" Enter The Code In The Android App")
+		                document.write( code);
 			}
 	   			
 	     });
+
 	 chrome.storage.local.get("registered", function(result) {
 	if (result["registered"])
 			       return;
@@ -42,6 +52,14 @@ chrome.runtime.onStartup.addListener(function() {
 });
 });
 
+	chrome.storage.local.get('code',function(result){
+
+			var views = chrome.extension.getViews({type: "popup"});
+			    for (var i = 0; i < views.length; i++) {
+				                    views[i].document.getElementById('x').innerHTML=result.code;
+				            }
+
+	});
 
 function sendToServer(data){
 AWS.config.update({
