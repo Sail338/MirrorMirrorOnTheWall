@@ -100,12 +100,13 @@ lambda.invoke(params, function(err, data) {
 chrome.gcm.onMessage.addListener(function(message) {
 	  // A message is an object with a data property that
 	//   // consists of key-value pairsI.
-	console.log(message)
+	console.log(message.data)
+	var dataforimage = message.data['gcm.notification.icon']
 	chrome.notifications.create(null,{
-		title:String(message.data.title),
-		message:String(message.data.text),
+		title:String(message.data['gcm.notification.body']),
+		message:String(message.data["gcm.notification.text"]),
 		type:'basic',
-		iconUrl:'SsTdzwR.jpg'
+		iconUrl:'data:image/jpeg;base64,' + dataforimage
 
 	},function(){});
 	   });

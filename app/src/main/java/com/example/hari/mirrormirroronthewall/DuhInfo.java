@@ -8,4 +8,6 @@ public class DuhInfo {
     String title;
     String text;
     String isChrome;
+    String img;
+
 }

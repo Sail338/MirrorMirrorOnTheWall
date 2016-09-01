@@ -3,7 +3,7 @@ var request = require('request')
 	firebase.initializeApp({
 		serviceAccount:'key.json',
 		
-			      databaseURL: "https://mirrormirroronthewall-3dbfc.firebaseio.com",
+			      databaseURL: "url",
 	});	
 
 exports.handler = function (evt, context, callback) {
@@ -14,14 +14,25 @@ exports.handler = function (evt, context, callback) {
 	    var ref = firebase.database().ref('/' + String(evt.code))
 	    ref.once('value').then(function(data){
 		console.log(data.val());
+		//create a imglinkinfirebase
 		//build post req
-		var data ={ 'data':{
-			"title":evt.title,
-			"text":evt.text
+		var data ={ 'notification':{
+			"body":evt.title,
+			"text":evt.text,
+			"icon": evt.img
 			
 		},
 			"to":data.val()
 		};
+			var post_options = {
+					url: 'https://fcm.googleapis.com/fcm/send',
+				      method: 'POST',
+				      headers: {
+					                'Content-Type': 'application/json',
+					      		'Authorization':'key=' + 'key',
+					            },
+				body:JSON.stringify(data)
+			};
 
 		    request({
 
@@ -29,7 +40,7 @@ exports.handler = function (evt, context, callback) {
 				      method: 'POST',
 				      headers: {
 					                'Content-Type': 'application/json',
-					      		'Authorization':'key=' + 'firevase_key'
+					      		'Authorization':'key=' + 'keE'
 					            },
 				body:JSON.stringify(data)
 			}
@@ -49,7 +60,6 @@ exports.handler = function (evt, context, callback) {
 	    }).then(function(){
 		context.done(null,"done");
 	    });
-
             //Query the DB for reg id
             //send push notification
     } else{
